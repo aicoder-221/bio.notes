@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 12 Biology — Ch 2: Sexual Reproduction in Flowering Plants</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1e2435;
+    --border: #2a3048;
+    --accent: #4ade80;
+    --accent2: #60a5fa;
+    --accent3: #f472b6;
+    --accent4: #fbbf24;
+    --accent5: #a78bfa;
+    --text: #e2e8f0;
+    --text-muted: #8892aa;
+    --text-dim: #4a5568;
+    --highlight: #4ade8022;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* ── Header ── */
+  header {
+    background: linear-gradient(135deg, #0f1117 0%, #1a1f35 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 32px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  header p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Tab bar ── */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    padding: 10px 32px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 85px;
+    z-index: 99;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  .tab {
+    padding: 9px 18px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid transparent;
+    border-bottom: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: transparent;
+    position: relative;
+    bottom: -1px;
+  }
+  .tab:hover { color: var(--text); background: var(--surface); }
+  .tab.active {
+    background: var(--surface);
+    border-color: var(--border);
+    border-bottom-color: var(--surface);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .tab-num {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    margin-right: 6px;
+  }
+
+  /* ── Main ── */
+  main {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .panel { display: none; animation: fadeIn 0.25s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Section heading ── */
+  .sec-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.55rem;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .sec-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Chips ── */
+  .chip-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .chip {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.73rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.18s;
+    user-select: none;
+  }
+  .chip.green  { background: #4ade8015; color: var(--accent);  border-color: #4ade8030; }
+  .chip.blue   { background: #60a5fa15; color: var(--accent2); border-color: #60a5fa30; }
+  .chip.pink   { background: #f472b615; color: var(--accent3); border-color: #f472b630; }
+  .chip.yellow { background: #fbbf2415; color: var(--accent4); border-color: #fbbf2430; }
+  .chip.purple { background: #a78bfa15; color: var(--accent5); border-color: #a78bfa30; }
+  .chip.active, .chip:hover { opacity: 1; filter: brightness(1.3); transform: scale(1.04); }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 18px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a4060; }
+  .card-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-top: 10px;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface2); }
+
+  /* ── Lists ── */
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 6px; font-size: 0.87rem; }
+  li::marker { color: var(--accent); }
+
+  /* ── Highlight boxes ── */
+  .box {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.85rem;
+  }
+  .box-green  { background: #4ade8012; border-left: 3px solid var(--accent);  }
+  .box-blue   { background: #60a5fa12; border-left: 3px solid var(--accent2); }
+  .box-pink   { background: #f472b612; border-left: 3px solid var(--accent3); }
+  .box-yellow { background: #fbbf2412; border-left: 3px solid var(--accent4); }
+  .box-purple { background: #a78bfa12; border-left: 3px solid var(--accent5); }
+
+  .box strong, .card strong { color: var(--text); }
+  .def {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* ── Code / formula ── */
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    color: var(--accent4);
+    margin: 10px 0;
+    display: block;
+  }
+
+  /* ── Tag ── */
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.05em;
+  }
+  .tag-imp { background: #f472b620; color: var(--accent3); border: 1px solid #f472b640; }
+  .tag-ncert { background: #60a5fa20; color: var(--accent2); border: 1px solid #60a5fa40; }
+  .tag-def { background: #4ade8020; color: var(--accent); border: 1px solid #4ade8040; }
+
+  /* ── Two-column ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Q cards ── */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 0.86rem;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .q-num {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: grid;
+    place-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── Fact pills ── */
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .fact-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.8rem;
+  }
+  .fact-pill .label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .fact-pill .val { color: var(--accent4); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* ── Sub-section inside panel ── */
+  .subsec {
+    margin-bottom: 30px;
+  }
+  .subsec-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsec-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Scroll to top ── */
+  #topBtn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #000;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    box-shadow: 0 4px 20px #4ade8040;
+  }
+  #topBtn.show { display: flex; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sexual Reproduction in Flowering Plants <span class="header-badge">NCERT</span></h1>
+  <p>Class 12 Biology · Chapter 2 · Exam-Oriented Notes</p>
+</header>
+
+<!-- TAB BAR -->
+<div class="tab-bar" id="tabBar">
+  <div class="tab active" onclick="switchTab(0)"><span class="tab-num" style="background:#4ade8030;color:var(--accent)">1</span>Flower & Anther</div>
+  <div class="tab" onclick="switchTab(1)"><span class="tab-num" style="background:#60a5fa30;color:var(--accent2)">2</span>Pollen & Ovule</div>
+  <div class="tab" onclick="switchTab(2)"><span class="tab-num" style="background:#f472b630;color:var(--accent3)">3</span>Pollination</div>
+  <div class="tab" onclick="switchTab(3)"><span class="tab-num" style="background:#fbbf2430;color:var(--accent4)">4</span>Fertilization</div>
+  <div class="tab" onclick="switchTab(4)"><span class="tab-num" style="background:#a78bfa30;color:var(--accent5)">5</span>Post-Fertilization</div>
+  <div class="tab" onclick="switchTab(5)"><span class="tab-num" style="background:#4ade8030;color:var(--accent)">6</span>Special Phenomena</div>
+  <div class="tab" onclick="switchTab(6)"><span class="tab-num" style="background:#f472b630;color:var(--accent3)">★</span>Quick Revision</div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 0: Flower & Anther -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel active" id="panel-0">
+  <div class="sec-title">Flower Structure & Microsporangium</div>
+  <div class="sec-sub">Structure of flower, anther wall layers, microsporogenesis</div>
+
+  <div class="subsec">
+    <div class="subsec-title">1. Structure of a Flower</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">4 Whorls of a Typical Flower</span></div>
+      <table>
+        <tr><th>Whorl</th><th>Structure</th><th>Type</th></tr>
+        <tr><td>Calyx</td><td>Sepals</td><td>—</td></tr>
+        <tr><td>Corolla</td><td>Petals</td><td>—</td></tr>
+        <tr><td>Androecium</td><td>Stamens</td><td>♂ Male</td></tr>
+        <tr><td>Gynoecium</td><td>Carpel / Pistil</td><td>♀ Female</td></tr>
+      </table>
+      <div class="box box-green" style="margin-top:14px">
+        <strong>Pistil</strong> = Stigma + Style + Ovary<br>
+        Flower can be <strong>bisexual</strong> or <strong>unisexual</strong> (staminate / pistillate)
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">2. Microsporangium (Anther) Structure</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Key Numbers</span></div>
+        <ul>
+          <li>Each anther = <strong>bilobed</strong></li>
+          <li>Each lobe = <strong>2 thecae</strong></li>
+          <li>Total = <strong>4 microsporangia</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent3)"></span><span style="color:var(--accent3)">Tapetum Types</span></div>
+        <ul>
+          <li><strong>Amoeboid / Invasive</strong></li>
+          <li><strong>Secretory / Glandular</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent4)"></span><span style="color:var(--accent4)">Wall Layers — Outer to Inner</span> <span class="tag tag-imp">IMP</span></div>
+      <table>
+        <tr><th>#</th><th>Layer</th><th>Function</th></tr>
+        <tr><td>1</td><td>Epidermis</td><td>Outermost protective layer</td></tr>
+        <tr><td>2</td><td>Endothecium</td><td>Mechanical support; aids dehiscence</td></tr>
+        <tr><td>3</td><td>Middle layers</td><td>—</td></tr>
+        <tr><td>4</td><td><strong>Tapetum</strong></td><td>Innermost; nutritive + secretory; produces precursors for pollen wall</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">3. Inside Microsporangium</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent5)"></span><span style="color:var(--accent5)">Events Inside</span></div>
+      <ul>
+        <li><strong>Microspore Mother Cells (MMC)</strong> form inside — diploid (2n)</li>
+        <li>MMC → <strong>Meiosis</strong> → <strong>Microspores (n)</strong></li>
+        <li>4 microspores together = <strong>Microspore Tetrad</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">4. Microsporogenesis <span class="tag tag-def">DEFINITION</span></div>
+    <div class="box box-green">
+      <strong>Microsporogenesis:</strong> Process of formation of microspores from MMC by meiosis.
+    </div>
+    <code class="formula">MMC (2n) ──Meiosis──▶ Microspores (n) ──▶ Pollen Grains</code>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 1: Pollen & Ovule -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-1">
+  <div class="sec-title">Pollen Grain & Ovule</div>
+  <div class="sec-sub">Pollen structure, megasporangium, megasporogenesis, embryo sac</div>
+
+  <div class="subsec">
+    <div class="subsec-title">1. Pollen Grain Structure</div>
+    <div class="box box-blue"><strong>Pollen grain = Male Gametophyte</strong></div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Wall Layers</span> <span class="tag tag-imp">IMP</span></div>
+      <table>
+        <tr><th>Layer</th><th>Composition</th><th>Feature</th></tr>
+        <tr><td><strong>Exine</strong> (outer)</td><td><strong>Sporopollenin</strong> — most resistant organic substance</td><td>Has <strong>germ pores</strong> (regions without sporopollenin)</td></tr>
+        <tr><td><strong>Intine</strong> (inner)</td><td>Cellulose + Pectin</td><td>—</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Cytoplasm Contents</span></div>
+      <ul>
+        <li><strong>1 Vegetative nucleus</strong> (tube nucleus)</li>
+        <li><strong>1 Generative nucleus</strong> → divides to form <strong>2 male gametes</strong></li>
+      </ul>
+      <div class="box box-yellow" style="margin-top:12px">
+        <strong>At maturity:</strong><br>
+        • <strong>2-celled stage</strong> — most angiosperms (vegetative + generative cell)<br>
+        • <strong>3-celled stage</strong> — generative cell already divided into 2 male gametes
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">2. Megasporangium (Ovule) Structure</div>
+    <div class="box box-pink"><strong>Ovule = Megasporangium</strong></div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent3)"></span><span style="color:var(--accent3)">Parts of Ovule</span></div>
+      <table>
+        <tr><th>Part</th><th>Description</th></tr>
+        <tr><td><strong>Integuments</strong></td><td>1 or 2 protective layers</td></tr>
+        <tr><td><strong>Micropyle</strong></td><td>Opening in integuments</td></tr>
+        <tr><td><strong>Chalaza</strong></td><td>Opposite end to micropyle</td></tr>
+        <tr><td><strong>Nucellus</strong></td><td>Main body tissue; contains MMC</td></tr>
+        <tr><td><strong>Funicle</strong></td><td>Stalk attaching ovule to placenta</td></tr>
+        <tr><td><strong>Hilum</strong></td><td>Junction of funicle and ovule body</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">3. Megasporogenesis <span class="tag tag-def">DEFINITION</span></div>
+    <div class="box box-pink">
+      <strong>Megasporogenesis:</strong> Formation of megaspores from MMC by meiosis.
+    </div>
+    <code class="formula">MMC (2n) ──Meiosis──▶ 4 Megaspores (n) in linear tetrad</code>
+    <div class="box box-yellow" style="margin-top:10px">
+      Only <strong>1 megaspore is functional</strong>; remaining <strong>3 degenerate</strong>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">4. Megagametogenesis — Female Gametophyte <span class="tag tag-imp">IMP</span></div>
+    <div class="box box-green">
+      <strong>Definition:</strong> Development of embryo sac from functional megaspore.
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Embryo Sac = Female Gametophyte</span></div>
+      <div class="box box-blue"><strong>Type: Monosporic · 8-nucleate · 7-celled</strong></div>
+      <table>
+        <tr><th>Position</th><th>Cells</th></tr>
+        <tr><td><strong>Micropylar end</strong></td><td>2 Synergids + 1 Egg cell = <strong>Egg apparatus</strong></td></tr>
+        <tr><td><strong>Centre</strong></td><td>Central cell with <strong>2 polar nuclei</strong></td></tr>
+        <tr><td><strong>Chalazal end</strong></td><td><strong>3 Antipodal cells</strong></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 2: Pollination -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-2">
+  <div class="sec-title">Pollination & Pollen–Pistil Interaction</div>
+  <div class="sec-sub">Types of pollination, agents, outbreeding devices, artificial hybridization, pollen–pistil interaction</div>
+
+  <div class="subsec">
+    <div class="subsec-title">1. Types of Pollination</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Types</span></div>
+      <table>
+        <tr><th>Type</th><th>Description</th></tr>
+        <tr><td><strong>Autogamy</strong></td><td>Same flower</td></tr>
+        <tr><td><strong>Geitonogamy</strong></td><td>Different flowers on same plant</td></tr>
+        <tr><td><strong>Xenogamy</strong></td><td>Different plants (genetically different) — promotes variation</td></tr>
+      </table>
+    </div>
+    <div class="two-col" style="margin-top:14px">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Wind-Pollinated Flowers</span></div>
+        <ul>
+          <li>Light pollen</li>
+          <li>Feathery stigma</li>
+          <li>Reduced petals</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent3)"></span><span style="color:var(--accent3)">Insect-Pollinated Flowers</span></div>
+        <ul>
+          <li>Nectar, scent</li>
+          <li>Bright petals</li>
+          <li>Large/sticky pollen</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title"><span class="dot" style="background:var(--accent5)"></span><span style="color:var(--accent5)">Agents of Pollination</span></div>
+      <table>
+        <tr><th>Category</th><th>Agent</th><th>Term</th></tr>
+        <tr><td>Abiotic</td><td>Wind</td><td>Anemophily</td></tr>
+        <tr><td>Abiotic</td><td>Water</td><td>Hydrophily</td></tr>
+        <tr><td>Biotic</td><td>Insects</td><td>Entomophily</td></tr>
+        <tr><td>Biotic</td><td>Birds</td><td>Ornithophily</td></tr>
+        <tr><td>Biotic</td><td>Bats</td><td>Chiropterophily</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">2. Water Pollination (Hydrophily) <span class="tag tag-ncert">NCERT</span></div>
+    <div class="box box-yellow">Hydrophily is <strong>rare</strong> — occurs in very few aquatic plants; water is not a reliable medium.</div>
+    <div class="card">
+      <table>
+        <tr><th>Plant</th><th>Mechanism</th><th>Type</th></tr>
+        <tr><td><strong>Vallisneria</strong></td><td>Female flower reaches surface on long stalk; male flowers detach and float; pollination at surface</td><td><strong>Epihydrophily</strong></td></tr>
+        <tr><td><strong>Zostera</strong> (sea grass)</td><td>Thread-like pollen carried underwater; no pollen wall</td><td><strong>Hypohydrophily</strong></td></tr>
+        <tr><td><strong>Hydrilla</strong></td><td>Pollen floats on surface to reach female</td><td>Surface</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">3. Outbreeding Devices <span class="tag tag-ncert">NCERT IMPORTANT</span></div>
+    <div class="box box-green">Plants prevent self-pollination to promote <strong>genetic diversity</strong>.</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Mechanisms</span></div>
+      <ol>
+        <li><strong>Dichogamy</strong> — male &amp; female mature at different times
+          <ul style="margin-top:6px">
+            <li><strong>Protandry</strong> — anther matures first (e.g., sunflower)</li>
+            <li><strong>Protogyny</strong> — stigma matures first</li>
+          </ul>
+        </li>
+        <li style="margin-top:10px"><strong>Herkogamy</strong> — physical barrier between anther and stigma</li>
+        <li style="margin-top:10px"><strong>Self-incompatibility</strong> — biochemical rejection of self pollen</li>
+        <li style="margin-top:10px"><strong>Unisexuality:</strong>
+          <ul style="margin-top:6px">
+            <li>Same plant → <strong>Monoecious</strong></li>
+            <li>Different plants → <strong>Dioecious</strong></li>
+          </ul>
+        </li>
+        <li style="margin-top:10px">Anther and stigma at <strong>different positions</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">4. Artificial Hybridization Techniques</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent4)"></span><span style="color:var(--accent4)">Steps</span></div>
+      <table>
+        <tr><th>Step</th><th>Process</th><th>Purpose</th></tr>
+        <tr><td><strong>Emasculation</strong></td><td>Removal of anthers from bisexual flower in bud stage</td><td>Prevents self-pollination</td></tr>
+        <tr><td><strong>Bagging</strong></td><td>Cover with paper bag</td><td>Prevents foreign pollen</td></tr>
+        <tr><td><strong>Dusting</strong></td><td>Desired pollen applied when stigma is receptive</td><td>Ensures cross-pollination</td></tr>
+        <tr><td><strong>Re-bagging</strong></td><td>Cover again after dusting</td><td>Prevents contamination</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">5. Pollen–Pistil Interaction <span class="tag tag-ncert">NCERT</span></div>
+    <div class="box box-purple">Recognition + acceptance/rejection of pollen by pistil = <strong>Pollen–Pistil Interaction</strong></div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent5)"></span><span style="color:var(--accent5)">Steps</span></div>
+      <ol>
+        <li>Stigma recognizes compatible pollen chemically → hydrates it → stimulates germination</li>
+        <li>Compatibility reaction — pistil tests pollen via chemical interaction between pollen proteins and stigma/style tissues
+          <ul style="margin-top:6px">
+            <li>Compatible pollen → <strong>allowed to germinate</strong></li>
+            <li>Incompatible pollen → <strong>inhibited/rejected</strong> (maintains species integrity)</li>
+          </ul>
+        </li>
+        <li style="margin-top:10px">Pollen tube growth — grows through style <strong>intercellularly</strong>; directed by <strong>chemotropic signals</strong> from ovule, synergids, female tissues</li>
+        <li style="margin-top:10px">Vegetative (tube) cell → forms pollen tube; generative cell → moves into tube → divides → <strong>2 male gametes</strong></li>
+      </ol>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Entry into Ovule</span> <span class="tag tag-imp">IMP</span></div>
+      <table>
+        <tr><th>Route</th><th>Term</th></tr>
+        <tr><td>Through <strong>Micropyle</strong></td><td><strong>Porogamy</strong> (most common)</td></tr>
+        <tr><td>Through <strong>Chalaza</strong></td><td><strong>Chalazogamy</strong></td></tr>
+        <tr><td>Through <strong>Integuments</strong></td><td><strong>Mesogamy</strong></td></tr>
+      </table>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title"><span class="dot" style="background:var(--accent3)"></span><span style="color:var(--accent3)">Role of Synergids</span></div>
+      <ul>
+        <li>Secrete chemicals to <strong>attract pollen tube</strong></li>
+        <li>Have <strong>filiform apparatus</strong> — guides tube entry</li>
+        <li>One synergid <strong>degenerates</strong> to allow tube discharge</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 3: Double Fertilization -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-3">
+  <div class="sec-title">Double Fertilization</div>
+  <div class="sec-sub">Syngamy, triple fusion — unique to angiosperms</div>
+
+  <div class="subsec">
+    <div class="subsec-title">Key Fact</div>
+    <div class="box box-yellow">
+      <strong>Discovered by:</strong> Nawaschin and Guignard<br>
+      <strong>Occurs in:</strong> ALL angiosperms
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Inside Embryo Sac (Before Fertilization)</div>
+    <div class="card">
+      <ul>
+        <li>1 egg cell</li>
+        <li>2 synergids</li>
+        <li>2 polar nuclei (in central cell)</li>
+        <li>3 antipodal cells</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Two Fusions <span class="tag tag-imp">IMP</span></div>
+    <div class="card" style="border-color:#4ade8050">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">1. Syngamy</span> <span class="tag tag-def">DEFINITION</span></div>
+      <span class="def">Fusion of male gamete with egg cell.</span>
+      <code class="formula">Male gamete (n)  +  Egg (n)  =  Zygote (2n)  →  Embryo</code>
+    </div>
+    <div class="card" style="border-color:#60a5fa50; margin-top:14px">
+      <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">2. Triple Fusion</span> <span class="tag tag-def">DEFINITION</span></div>
+      <span class="def">Fusion involving three haploid nuclei — male gamete + 2 polar nuclei.</span>
+      <code class="formula">Male gamete (n)  +  2 Polar nuclei (n+n)  =  PEN (3n)  →  Endosperm</code>
+    </div>
+    <div class="box box-pink" style="margin-top:16px">
+      <strong>⭐ DOUBLE FERTILIZATION = Syngamy + Triple Fusion</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 4: Post-Fertilization -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-4">
+  <div class="sec-title">Post-Fertilization Events</div>
+  <div class="sec-sub">Endosperm · Embryogenesis · Seed · Fruit formation</div>
+
+  <div class="box box-green" style="margin-bottom:20px">After fertilization → <strong>Endosperm → Embryo → Seed → Fruit</strong></div>
+
+  <div class="subsec">
+    <div class="subsec-title">A. Endosperm Formation</div>
+    <div class="box box-yellow"><strong>Function:</strong> Nutritive tissue for developing embryo (carbs, lipids, proteins)</div>
+    <code class="formula">PEN  →  PEC (Primary Endosperm Cell)  →  Endosperm (3n — triploid)</code>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title"><span class="dot" style="background:var(--accent4)"></span><span style="color:var(--accent4)">Types of Endosperm</span> <span class="tag tag-ncert">NCERT</span></div>
+      <table>
+        <tr><th>Type</th><th>Feature</th></tr>
+        <tr><td><strong>Nuclear</strong> (most common)</td><td>Nucleus divides without wall formation; free nuclei</td></tr>
+        <tr><td><strong>Cellular</strong></td><td>Wall forms after every division</td></tr>
+        <tr><td><strong>Helobial</strong></td><td>Intermediate; one big + one small chamber</td></tr>
+      </table>
+      <div class="box box-pink" style="margin-top:12px">⚠️ In <strong>orchids</strong>, endosperm <strong>fails to develop</strong>.</div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">B. Embryogenesis</div>
+    <div class="box box-green"><strong>Definition:</strong> Development of embryo from zygote.</div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Stages (NCERT)</span></div>
+      <code class="formula">Zygote → Proembryo → Globular → Heart-shaped → Torpedo → Mature Embryo</code>
+    </div>
+    <div class="two-col" style="margin-top:14px">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Dicot Embryo</span></div>
+        <ul>
+          <li>Radicle</li>
+          <li>Plumule</li>
+          <li>Hypocotyl</li>
+          <li>Epicotyl</li>
+          <li><strong>2 Cotyledons</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent3)"></span><span style="color:var(--accent3)">Monocot Embryo</span></div>
+        <ul>
+          <li><strong>Scutellum</strong> (single cotyledon)</li>
+          <li><strong>Coleoptile</strong> — sheath over plumule</li>
+          <li><strong>Coleorhiza</strong> — sheath over radicle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">C. Seed Formation</div>
+    <div class="box box-blue"><strong>Ovule → Seed</strong></div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Changes During Seed Formation</span></div>
+      <table>
+        <tr><th>Structure in Ovule</th><th>Becomes</th></tr>
+        <tr><td>Integuments</td><td>Seed coat (Outer = <strong>Testa</strong>, Inner = <strong>Tegmen</strong>)</td></tr>
+        <tr><td>Zygote</td><td>Embryo</td></tr>
+        <tr><td>Endosperm</td><td>Retained or used up</td></tr>
+      </table>
+    </div>
+    <div class="two-col" style="margin-top:14px">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent)"></span><span style="color:var(--accent)">Albuminous Seeds</span></div>
+        <p style="font-size:0.84rem">Food retained in <strong>endosperm</strong></p>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">e.g., wheat, maize, castor</p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent5)"></span><span style="color:var(--accent5)">Exalbuminous Seeds</span></div>
+        <p style="font-size:0.84rem">Food stored in <strong>cotyledons</strong>; endosperm consumed</p>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">e.g., pea, groundnut</p>
+      </div>
+    </div>
+    <div class="box box-yellow" style="margin-top:12px">
+      <strong>Micropyle</strong> remains in seed → helps in water absorption during germination<br>
+      <strong>Hilum</strong> = scar of funicle attachment
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">D. Fruit Formation</div>
+    <div class="box box-pink"><strong>Ovary → Fruit</strong></div>
+    <div class="card">
+      <table>
+        <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+        <tr><td><strong>True fruit</strong></td><td>Develops only from ovary</td><td>Mango</td></tr>
+        <tr><td><strong>False fruit</strong></td><td>Develops from ovary + other floral parts</td><td>Apple (from thalamus)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">E. Seed Dormancy & Germination</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent4)"></span><span style="color:var(--accent4)">Dormancy</span></div>
+        <span class="def">Seed does NOT germinate even under favourable conditions.</span>
+        <strong style="font-size:0.8rem">Reasons:</strong>
+        <ul style="margin-top:6px">
+          <li>Hard seed coat</li>
+          <li>Chemical inhibitors</li>
+          <li>Immature embryo</li>
+        </ul>
+        <div class="box box-yellow" style="margin-top:10px;font-size:0.8rem"><strong>Importance:</strong> Allows seeds to survive harsh/unfavourable periods.</div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot" style="background:var(--accent2)"></span><span style="color:var(--accent2)">Germination</span></div>
+        <p style="font-size:0.84rem">Seed absorbs water via <strong>micropyle</strong> → embryo resumes growth → seedling emerges</p>
+        <table style="margin-top:10px">
+          <tr><th>Type</th><th>Feature</th></tr>
+          <tr><td><strong>Epigeal</strong></td><td>Cotyledons come above soil</td></tr>
+          <tr><td><strong>Hypogeal</strong></td><td>Cotyledons remain underground</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 5: Special Phenomena -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-5">
+  <div class="sec-title">Special Phenomena</div>
+  <div class="sec-sub">Parthenocarpy · Apomixis · Polyembryony</div>
+
+  <div class="subsec">
+    <div class="subsec-title">1. Parthenocarpy <span class="tag tag-imp">IMP</span></div>
+    <div class="box box-green">
+      <strong>Definition:</strong> Fruit formation <strong>without fertilization</strong> → produces <strong>seedless fruits</strong>
+    </div>
+    <div class="card">
+      <ul>
+        <li>Example: <strong>Banana</strong></li>
+        <li>Induced by <strong>growth regulators</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">2. Apomixis <span class="tag tag-ncert">NCERT</span></div>
+    <div class="box box-blue">
+      <strong>Definition:</strong> Formation of seeds <strong>without fertilization</strong>
+    </div>
+    <div class="card">
+      <ul>
+        <li>Common in some <strong>grasses</strong></li>
+        <li>Asexual embryo develops from <strong>diploid nucellar cells</strong></li>
+        <li><strong>No meiosis + No fertilization</strong></li>
+        <li>Agricultural importance: maintains hybrid characters generation after generation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">3. Polyembryony <span class="tag tag-imp">IMP</span></div>
+    <div class="box box-purple">
+      <strong>Definition:</strong> Formation of <strong>more than one embryo</strong> in a seed.
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot" style="background:var(--accent5)"></span><span style="color:var(--accent5)">Details</span></div>
+      <ul>
+        <li>Example: <strong>Citrus</strong></li>
+        <li><strong>Causes:</strong>
+          <ul style="margin-top:6px">
+            <li>More than one egg fertilized</li>
+            <li>Embryo from nucellar cells</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- PANEL 6: Quick Revision -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="panel" id="panel-6">
+  <div class="sec-title">★ Quick Revision</div>
+  <div class="sec-sub">High-yield facts · Summary · Probable exam questions</div>
+
+  <div class="subsec">
+    <div class="subsec-title">⚡ High-Yield Facts</div>
+    <div class="fact-grid">
+      <div class="fact-pill"><div class="label">Sporopollenin</div><div class="val">Most resistant organic substance</div></div>
+      <div class="fact-pill"><div class="label">Tapetum</div><div class="val">Innermost + most important nutritive wall layer</div></div>
+      <div class="fact-pill"><div class="label">Endosperm nucleus</div><div class="val">3n (triploid)</div></div>
+      <div class="fact-pill"><div class="label">Zygote</div><div class="val">2n (diploid)</div></div>
+      <div class="fact-pill"><div class="label">Embryo sac</div><div class="val">7-celled, 8-nucleate</div></div>
+      <div class="fact-pill"><div class="label">Double fertilization</div><div class="val">Unique to angiosperms</div></div>
+      <div class="fact-pill"><div class="label">Discovered by</div><div class="val">Nawaschin & Guignard</div></div>
+      <div class="fact-pill"><div class="label">Vallisneria</div><div class="val">Epihydrophily</div></div>
+      <div class="fact-pill"><div class="label">Zostera</div><div class="val">Hypohydrophily</div></div>
+      <div class="fact-pill"><div class="label">Parthenocarpy eg.</div><div class="val">Banana</div></div>
+      <div class="fact-pill"><div class="label">Polyembryony eg.</div><div class="val">Citrus</div></div>
+      <div class="fact-pill"><div class="label">Orchid seeds</div><div class="val">No endosperm</div></div>
+      <div class="fact-pill"><div class="label">Apomixis common in</div><div class="val">Grasses</div></div>
+      <div class="fact-pill"><div class="label">Porogamy</div><div class="val">Most common entry route</div></div>
+      <div class="fact-pill"><div class="label">Filiform apparatus</div><div class="val">In synergids; guides pollen tube</div></div>
+      <div class="fact-pill"><div class="label">Nuclear endosperm</div><div class="val">Most common type</div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="subsec">
+    <div class="subsec-title">📌 Summary</div>
+    <div class="box box-blue">
+      Sexual reproduction in flowering plants involves formation of <strong>male gametophyte (pollen)</strong> in microsporangium and <strong>female gametophyte (embryo sac)</strong> in megasporangium via meiosis. Pollination (by wind, water, or animals) transfers pollen to stigma. Pollen–pistil interaction determines compatibility. <strong>Double fertilization</strong> (syngamy + triple fusion) is unique to angiosperms, producing <strong>zygote (2n)</strong> and <strong>PEN (3n)</strong>. Post-fertilization events include endosperm and embryo development, seed formation, and fruit formation. Special phenomena include <strong>apomixis, polyembryony, and parthenocarpy</strong>.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="subsec">
+    <div class="subsec-title">📝 Probable Exam Questions</div>
+    <div class="q-card"><div class="q-num">01</div><div>Draw and label the structure of a microsporangium. Name its wall layers.</div></div>
+    <div class="q-card"><div class="q-num">02</div><div>What is microsporogenesis? How does it differ from megasporogenesis?</div></div>
+    <div class="q-card"><div class="q-num">03</div><div>Explain double fertilization. Why is it significant?</div></div>
+    <div class="q-card"><div class="q-num">04</div><div>Differentiate between syngamy and triple fusion.</div></div>
+    <div class="q-card"><div class="q-num">05</div><div>What is the embryo sac? Describe its 7-celled, 8-nucleate structure.</div></div>
+    <div class="q-card"><div class="q-num">06</div><div>What are outbreeding devices? Explain any three with examples.</div></div>
+    <div class="q-card"><div class="q-num">07</div><div>Differentiate between albuminous and exalbuminous seeds with examples.</div></div>
+    <div class="q-card"><div class="q-num">08</div><div>Define apomixis. What is its agricultural significance?</div></div>
+    <div class="q-card"><div class="q-num">09</div><div>What is parthenocarpy? How is it induced?</div></div>
+    <div class="q-card"><div class="q-num">10</div><div>Explain the types of endosperm with examples.</div></div>
+    <div class="q-card"><div class="q-num">11</div><div>What are the roles of synergids in fertilization?</div></div>
+    <div class="q-card"><div class="q-num">12</div><div>Differentiate between porogamy, chalazogamy, and mesogamy.</div></div>
+    <div class="q-card"><div class="q-num">13</div><div>What is polyembryony? Give one example and its cause.</div></div>
+    <div class="q-card"><div class="q-num">14</div><div>Write a note on pollen–pistil interaction.</div></div>
+    <div class="q-card"><div class="q-num">15</div><div>What is sporopollenin? Why is it significant?</div></div>
+  </div>
+</div>
+
+</main>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  function switchTab(idx) {
+    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+    document.querySelectorAll('.panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  window.addEventListener('scroll', () => {
+    document.getElementById('topBtn').classList.toggle('show', window.scrollY > 300);
+  });
+</script>
+</body>
+</html>
