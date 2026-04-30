@@ -1,11 +1,23 @@
 import streamlit as st
+import streamlit.components.v1 as components
+import os
 
-st.set_page_config(page_title="Biology Unit 1 Notes", layout="wide")
+st.set_page_config(page_title="Biology Chapter 1", layout="wide")
 
-def load_html(file_name):
-    with open(file_name, "r", encoding="utf-8") as f:
-        return f.read()
+st.title("📘 Biology Chapter 1 - Interactive Notes")
 
-html = load_html("bio_unit1.html")
+# Try possible file names
+file_candidates = ["bio.ch.1.html", "bio.ch.1"]
 
-st.components.v1.html(html, height=1200, scrolling=True)
+html_content = None
+
+for file in file_candidates:
+    if os.path.exists(file):
+        with open(file, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        break
+
+if html_content:
+    components.html(html_content, height=800, scrolling=True)
+else:
+    st.error("HTML file not found. Make sure 'bio.ch.1.html' (or 'bio.ch.1') is in the repo.")
